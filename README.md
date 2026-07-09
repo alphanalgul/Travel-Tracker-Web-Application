@@ -77,7 +77,7 @@ The bucket-list page displays countries the user wants to visit, as well as visi
 
 Users can also edit or delete individual bucket-list items.
 
-![Bucket List Page](images/bucketlist.png)
+![Bucket List Page](images/bucket-list.png)
 
 ### Travel Statistics Page
 
