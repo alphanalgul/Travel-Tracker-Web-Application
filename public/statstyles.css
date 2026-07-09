@@ -1,0 +1,372 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f7fb;
+  color: #111827;
+}
+
+/* Page Layout*/
+.stats-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 24px 64px;
+}
+
+.stats-section + .stats-section {
+  margin-top: 56px;
+}
+
+.section-header {
+  margin-bottom: 24px;
+}
+
+.section-header h2 {
+  margin: 0 0 8px;
+  font-size: 28px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.section-header p {
+  margin: 0;
+  font-size: 15px;
+  color: #6b7280;
+}
+
+/* Grid Layout */
+.stats-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.general-grid {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.continent-grid {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* Card Components */
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 180px;
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 22px;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.12);
+}
+
+.featured-card {
+  border: 1px solid #e5e7eb;
+}
+
+.highlight-card {
+  background: #fcfcfd;
+}
+
+.progress-card {
+  align-items: center;
+  text-align: center;
+}
+
+.progress-card .stat-header {
+  width: 100%;
+}
+
+.continent-card .stat-number {
+  font-size: 42px;
+}
+
+/*Inner elements of the  Card */
+.stat-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.stat-label {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.stat-number {
+  margin: 0;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.05;
+  color: #0f172a;
+}
+
+.stat-number-small {
+  font-size: 32px;
+  line-height: 1.2;
+}
+
+.stat-subtext {
+  margin: 12px 0 0;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* User Badges*/
+.featured-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badge-success {
+  background: #e8f7ee;
+  color: #166534;
+}
+
+/*Mliestone progress*/
+.milestone-section {
+  margin-top: 14px;
+}
+
+.milestone-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.milestone-label,
+.milestone-value {
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.milestone-value {
+  font-weight: 600;
+}
+
+.mini-progress {
+  width: 100%;
+  height: 10px;
+  overflow: hidden;
+  background: #e5e7eb;
+  border-radius: 999px;
+}
+
+.mini-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+  border-radius: 999px;
+}
+
+/* World Progress pie chart*/
+.pie-chart {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 130px;
+  height: 130px;
+  margin: 8px auto 18px;
+  background: conic-gradient(
+    #4f46e5 0deg 151.2deg,
+    #e5e7eb 151.2deg 360deg
+  );
+  border-radius: 50%;
+}
+
+.pie-chart::before {
+  content: "";
+  position: absolute;
+  width: 82px;
+  height: 82px;
+  background: #ffffff;
+  border-radius: 50%;
+}
+
+.pie-value {
+  position: relative;
+  z-index: 1;
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* Continent progress bars */
+.progress-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 14px 0 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.continent-progress-bar {
+  width: 100%;
+  height: 10px;
+  overflow: hidden;
+  background: #e5e7eb;
+  border-radius: 999px;
+}
+
+.continent-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+/* Continent Icons*/
+.visited-icon {
+  background: #e8f7ee;
+}
+
+.remaining-icon {
+  background: #fff3e8;
+}
+
+.bucket-icon {
+  background: #f3e8ff;
+}
+
+.progress-icon {
+  background: #eaf1ff;
+}
+
+.continent-icon {
+  background: #e0f2fe;
+}
+
+.europe-icon {
+  background: #dbeafe;
+  color: #1e3a8a;
+}
+
+.asia-icon {
+  background: #ede9fe;
+}
+
+.africa-icon {
+  background: #fef3c7;
+}
+
+.north-america-icon {
+  background: #dbeafe;
+}
+
+.south-america-icon {
+  background: #dcfce7;
+}
+
+.oceania-icon {
+  background: #cffafe;
+}
+
+.antarctica-icon {
+  background: #eef2ff;
+}
+
+.most-icon {
+  background: #fef3c7;
+}
+
+.least-icon {
+  background: #fee2e2;
+}
+
+/*Continents */
+.europe-fill {
+  background: linear-gradient(90deg, #60a5fa, #2563eb);
+}
+
+.asia-fill {
+  background: linear-gradient(90deg, #a78bfa, #7c3aed);
+}
+
+.africa-fill {
+  background: linear-gradient(90deg, #facc15, #eab308);
+}
+
+.north-america-fill {
+  background: linear-gradient(90deg, #93c5fd, #3b82f6);
+}
+
+.south-america-fill {
+  background: linear-gradient(90deg, #86efac, #22c55e);
+}
+
+.oceania-fill {
+  background: linear-gradient(90deg, #67e8f9, #06b6d4);
+}
+
+.antarctica-fill {
+  background: linear-gradient(90deg, #cbd5e1, #94a3b8);
+}
+
+/* Responsiveness */
+@media (max-width: 640px) {
+  .stats-page {
+    padding: 32px 16px 48px;
+  }
+
+  .section-header h2 {
+    font-size: 24px;
+  }
+
+  .stat-number {
+    font-size: 40px;
+  }
+
+  .stat-number-small {
+    font-size: 28px;
+  }
+
+  .continent-card .stat-number {
+    font-size: 34px;
+  }
+
+  .featured-top {
+    align-items: flex-start;
+  }
+}

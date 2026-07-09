@@ -1,0 +1,205 @@
+body {
+  margin: 0;
+  background: #1d2430;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.map-page {
+  min-height: 100vh;
+}
+.country-form {
+  padding: 16px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.country-form input {
+  flex: 1;
+  padding: 14px;
+  font-size: 16px;
+}
+
+.country-form button {
+  padding: 14px 20px;
+  border: none;
+  background: #f4b000;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.map-section {
+  display: none;
+  padding: 10px 14px 30px;
+}
+
+.map-section.active {
+  display: block;
+}
+
+.map-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.world-map {
+  width: 100%;
+  max-width: 1200px;
+  height: auto;
+}
+
+.world-map path {
+  fill: #3b4353;
+  stroke: #232a36;
+  stroke-width: 0.7;
+}
+
+.total-count {
+  margin-top: 20px;
+  font-size: 20px;
+}
+/* Tabs container */
+.map-tabs {
+  display: flex;
+}
+
+/* Base tab style */
+.tab-btn {
+  border: none;
+  padding: 14px 24px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #111;
+}
+
+/* Always green */
+.tab-btn.visited {
+  background: #16a34a; /* green */
+}
+
+/* Always orange */
+.tab-btn.bucket {
+  background: #f59e0b; /* orange */
+}
+
+
+/* ADD button → blue */
+.country-form button {
+  padding: 14px 20px;
+  border: none;
+  background: #2563eb; /* blue */
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: 0.2s ease;
+}
+
+/* Top bar container */
+.top-bar {
+  padding: 16px 20px 0;
+}
+
+.map-header {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  gap: 12px; /* controls spacing between tabs and button */
+}
+
+/* Tabs stay horizontal */
+.map-tabs {
+  display: flex;
+  gap: 0;
+}
+
+/* Back button (slightly refined) */
+.back-btn {
+  text-decoration: none;
+  background: #374151;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+
+.back-btn:hover {
+  background: #4b5563;
+}
+
+.map-legend {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  font-weight: 600;
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.legend-color.visited {
+  background: #22c55e;
+}
+
+.legend-color.bucket {
+  background: #ffb000;
+}
+/* Dropdown container */
+.country-form select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background-color: #1f2937; /* dark */
+  color: #f9fafb;
+
+  border: 1px solid #374151;
+  border-radius: 8px;
+
+  padding: 10px 40px 10px 12px;
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+  outline: none;
+
+  transition: all 0.2s ease;
+}
+
+/* Hover + focus */
+.country-form select:hover {
+  border-color: #60a5fa;
+}
+
+.country-form select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+}
+
+/* Custom arrow */
+.country-form {
+  position: relative;
+}
+
+.country-form select {
+  background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='20' viewBox='0 0 20 20' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M5 7l5 5 5-5H5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+}

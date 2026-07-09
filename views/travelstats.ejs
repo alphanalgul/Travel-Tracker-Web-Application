@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Travel Stats</title>
+  <link rel="stylesheet" href="/statstyles.css" />
+</head>
+<body>
+  <%
+    const continentMeta = {
+      Europe: {
+        icon: "🏛️",
+        iconClass: "europe-icon",
+        fillClass: "europe-fill",
+        description: "Discover the rich history of the world's most visited continent."
+      },
+      Asia: {
+        icon: "☸️",
+        iconClass: "asia-icon",
+        fillClass: "asia-fill",
+        description: "Experience the rich history, culture and cuisine of the world's largest and most populous continent."
+      },
+      Africa: {
+        icon: "🐘",
+        iconClass: "africa-icon",
+        fillClass: "africa-fill",
+        description: "Experience the rich wildlife of Africa: lions, elephants, rhinos, and buffalo."
+      },
+      "North America": {
+        icon: "🦬",
+        iconClass: "north-america-icon",
+        fillClass: "north-america-fill",
+        description: "Explore the beautiful scenery and vibrant cities of North America."
+      },
+      "South America": {
+        icon: "🦜",
+        iconClass: "south-america-icon",
+        fillClass: "south-america-fill",
+        description: "Explore the ancient ruins and deep jungles of South America."
+      },
+      Oceania: {
+        icon: "🗿",
+        iconClass: "oceania-icon",
+        fillClass: "oceania-fill",
+        description: "Explore the rich marine life and beautiful beaches of Oceania."
+      },
+      Antarctica: {
+        icon: "🐧",
+        iconClass: "antarctica-icon",
+        fillClass: "antarctica-fill",
+        description: "Discover the penguins and icy deserts of the world's least visited continent."
+      }
+    };
+
+    const continentProgressPercent = Math.round((stats.continentsVisited / 7) * 100);
+  %>
+
+  <main class="stats-page">
+    <section class="stats-section">
+      <div class="section-header">
+        <h2>General Stats</h2>
+        <p>Your overall travel overview</p>
+      </div>
+
+      <div class="stats-grid general-grid">
+        <!-- Countries Visited -->
+        <div class="stat-card featured-card">
+          <div>
+            <div class="stat-header">
+              <div class="icon-box visited-icon">🌍</div>
+              <p class="stat-label">Countries Visited</p>
+            </div>
+
+            <div class="featured-top">
+              <h2 class="stat-number"><%= stats.countriesVisited %></h2>
+              <span class="badge badge-success"><%= stats.currentLevel %></span>
+            </div>
+          </div>
+
+          <div class="milestone-section">
+            <div class="milestone-row">
+              <span class="milestone-label">Next milestone</span>
+              <span class="milestone-value">
+                <%= stats.nextMilestone ? `${stats.nextMilestone} countries` : "Max level reached" %>
+              </span>
+            </div>
+
+            <div class="mini-progress">
+              <div
+                class="mini-progress-fill"
+                style="width: <%= Math.min(stats.milestoneProgress, 100) %>%;"
+              ></div>
+            </div>
+
+            <p class="stat-subtext">
+              <% if (stats.nextMilestone) { %>
+                <%= stats.countriesToNext %> more countries to reach your next badge
+              <% } else { %>
+                You have reached the highest explorer badge
+              <% } %>
+            </p>
+          </div>
+        </div>
+
+        <!-- Countries Remaining -->
+        <div class="stat-card">
+          <div>
+            <div class="stat-header">
+              <div class="icon-box remaining-icon">📍</div>
+              <p class="stat-label">Countries Remaining</p>
+            </div>
+
+            <h2 class="stat-number"><%= stats.countriesRemaining %></h2>
+          </div>
+
+          <p class="stat-subtext">More destinations waiting for you</p>
+        </div>
+
+        <!-- Bucket List -->
+        <div class="stat-card">
+          <div>
+            <div class="stat-header">
+              <div class="icon-box bucket-icon">🪣</div>
+              <p class="stat-label">Bucket List</p>
+            </div>
+
+            <h2 class="stat-number"><%= stats.bucketListCount %></h2>
+          </div>
+
+          <p class="stat-subtext">Countries you want to visit</p>
+        </div>
+
+        <!-- World Progress -->
+        <div class="stat-card progress-card">
+          <div class="stat-header">
+            <div class="icon-box progress-icon">🧭</div>
+            <p class="stat-label">World Progress</p>
+          </div>
+
+          <div
+            class="pie-chart"
+            style="background: conic-gradient(#4f46e5 0% <%= stats.worldProgress %>%, #e5e7eb <%= stats.worldProgress %>% 100%);"
+          >
+            <div class="pie-value"><%= stats.worldProgress %>%</div>
+          </div>
+
+          <p class="stat-subtext">
+            <%= stats.countriesVisited %> of <%= stats.totalCountries %> countries explored
+          </p>
+        </div>
+
+        <!-- Continents Visited -->
+        <div class="stat-card continent-card">
+          <div class="stat-header">
+            <div class="icon-box continent-icon">🧭</div>
+            <p class="stat-label">Continents Visited</p>
+          </div>
+
+          <p class="stat-number"><%= stats.continentsVisited %> / 7</p>
+
+          <div class="progress-meta">
+            <span>Progress</span>
+            <span><%= continentProgressPercent %>%</span>
+          </div>
+
+          <div class="continent-progress-bar">
+            <div
+              class="continent-progress-fill europe-fill"
+              style="width: <%= continentProgressPercent %>%;"
+            ></div>
+          </div>
+
+          <p class="stat-subtext">Exploring the world step by step</p>
+        </div>
+
+        <!-- Most Visited Continent -->
+        <div class="stat-card highlight-card">
+          <div>
+            <div class="stat-header">
+              <div class="icon-box most-icon">🏆</div>
+              <p class="stat-label">Most Visited Continent</p>
+            </div>
+
+            <h2 class="stat-number stat-number-small"><%= stats.mostVisited.name %></h2>
+          </div>
+
+          <p class="stat-subtext"><%= stats.mostVisited.visited %> countries visited</p>
+        </div>
+
+        <!-- Least Visited Continent -->
+        <div class="stat-card highlight-card">
+          <div>
+            <div class="stat-header">
+              <div class="icon-box least-icon">📍</div>
+              <p class="stat-label">Least Visited Continent</p>
+            </div>
+
+            <h2 class="stat-number stat-number-small"><%= stats.leastVisited.name %></h2>
+          </div>
+
+          <p class="stat-subtext"><%= stats.leastVisited.visited %> countries visited</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-section">
+      <div class="section-header">
+        <h2>Continent Breakdown</h2>
+        <p>Your progress across each continent</p>
+      </div>
+
+      <div class="stats-grid continent-grid">
+        <% stats.continentBreakdown.forEach(continent => { 
+             const meta = continentMeta[continent.name] || {
+               icon: "🌍",
+               iconClass: "",
+               fillClass: "",
+               description: "Explore more of this region."
+             };
+        %>
+          <div class="stat-card continent-card">
+            <div>
+              <div class="stat-header">
+                <div class="icon-box <%= meta.iconClass %>"><%= meta.icon %></div>
+                <p class="stat-label"><%= continent.name %></p>
+              </div>
+
+              <h2 class="stat-number"><%= continent.visited %> / <%= continent.total %></h2>
+
+              <div class="progress-meta">
+                <span>Visited</span>
+                <span><%= continent.percent %>%</span>
+              </div>
+
+              <div class="continent-progress-bar">
+                <div
+                  class="continent-progress-fill <%= meta.fillClass %>"
+                  style="width: <%= continent.percent %>%;"
+                ></div>
+              </div>
+            </div>
+
+            <p class="stat-subtext"><%= meta.description %></p>
+          </div>
+        <% }) %>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

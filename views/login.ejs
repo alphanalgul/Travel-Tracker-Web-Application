@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <link rel="stylesheet" href="/loginstyle.css" />
+</head>
+<body>
+  <div class="auth-page">
+    <div class="auth-card">
+      <h1>Welcome Back</h1>
+
+    <% if (error && error.length > 0) { %>
+      <p id="flash-message" class="flash-message flash-error">
+      <%= error[0] %>
+      </p>
+    <% } else if (msg && msg.length > 0) { %>
+       <p id="flash-message" class="flash-message flash-success">
+        <%= msg[0] %>
+       </p>
+    <% } %>
+
+      <form action="/login" method="POST" class="auth-form">
+        <div class="input-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Enter your username"
+          />
+        </div>
+
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+          />
+        </div>
+
+        <button type="submit" class="auth-btn">Login</button>
+
+        <p class="auth-switch">
+          If you don't have an account:
+          <a href="/registration">Create one</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const flash = document.getElementById("flash-message");
+    if (flash) {
+      setTimeout(() => {
+        flash.style.opacity = "0";
+        setTimeout(() => flash.remove(), 500);
+      }, 5000);
+    }
+  </script>
+</body>
+</html>

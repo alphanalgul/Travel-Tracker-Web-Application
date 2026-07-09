@@ -1,0 +1,264 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f6f7fb;
+  color: #222;
+}
+
+.gallery-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.gallery-header {
+  margin-bottom: 2rem;
+}
+
+.gallery-header h1 {
+  margin-bottom: 0.4rem;
+  font-size: 2rem;
+}
+
+.gallery-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 2rem;
+}
+
+.gallery-sidebar,
+.gallery-content,
+.add-section-card,
+.section-card,
+.upload-card,
+.photo-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.gallery-sidebar {
+  padding: 1.2rem;
+  height: fit-content;
+}
+
+.gallery-sidebar h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.country-link {
+  display: block;
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.7rem;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #222;
+  background: #f2f4f8;
+  transition: 0.2s ease;
+}
+
+.country-link:hover {
+  background: #dfe7ff;
+}
+
+.country-link.active {
+  background: #4f7cff;
+  color: white;
+}
+
+.gallery-content {
+  padding: 1.5rem;
+}
+
+.country-header {
+  margin-bottom: 1.5rem;
+}
+
+.add-section-card {
+  padding: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.section-card {
+  padding: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.section-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.upload-card {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f9fbff;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+input[type="text"],
+textarea,
+input[type="file"] {
+  padding: 0.8rem;
+  border: 1px solid #d7dce5;
+  border-radius: 10px;
+  font-size: 0.95rem;
+}
+
+button {
+  width: fit-content;
+  padding: 0.75rem 1.2rem;
+  border: none;
+  border-radius: 10px;
+  background: #4f7cff;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+button:hover {
+  opacity: 0.92;
+}
+
+.delete-btn {
+  background: #e14d4d;
+}
+
+.photo-grid {
+  margin-top: 1.2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.photo-card {
+  padding: 0.8rem;
+}
+
+.photo-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+.flash-success,
+.flash-error {
+  padding: 0.9rem 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.flash-success {
+  background: #dff6e3;
+  color: #1d6b34;
+}
+
+.flash-error {
+  background: #ffe0e0;
+  color: #8a1f1f;
+}
+
+.empty-message {
+  margin-top: 1rem;
+  color: #666;
+}
+
+@media (max-width: 900px) {
+  .gallery-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .section-top {
+    flex-direction: column;
+  }
+}
+
+.photo-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.download-btn {
+  text-decoration: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  background: #4f7cff;
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.download-btn:hover {
+  opacity: 0.9;
+}
+
+.gallery-photo {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+  margin-bottom: 0.6rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.gallery-photo:hover {
+  transform: scale(1.02);
+}
+
+.photo-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.88);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.photo-modal-content {
+  max-width: 90vw;
+  max-height: 90vh;
+  text-align: center;
+  position: relative;
+}
+
+.photo-modal-content img {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 14px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
+}
+
+.photo-modal-content p {
+  margin-top: 1rem;
+  color: white;
+  font-size: 1rem;
+}
+
+.photo-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2.5rem;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}

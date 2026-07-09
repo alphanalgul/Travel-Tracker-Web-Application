@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bucket List</title>
+    <link rel="stylesheet" href="/bucketlist-style.css" />
+  </head>
+
+  <body>
+    <div class="page-container">
+      <div class="top-bar">
+        <a href="/home" class="home-btn">← Home</a>
+      </div>
+
+      <div class="page-header">
+        <h1>My Bucket List</h1>
+        <p>Plan what you want to do in the countries on your bucket list.</p>
+      </div>
+
+      <% if (msg && msg.length > 0) { %>
+        <div class="flash-message">
+          <%= msg[0] %>
+        </div>
+      <% } %>
+
+      <% if (!groupedCountries || groupedCountries.length === 0) { %>
+        <div class="empty-state">
+          <h2>No bucket list countries yet</h2>
+          <p>Add countries from your world map bucket list first.</p>
+        </div>
+      <% } %>
+
+      <div class="countries-list">
+        <% if (groupedCountries && groupedCountries.length > 0) { %>
+          <% groupedCountries.forEach(function(country) { %>
+
+            <div class="country-card">
+              <div class="country-header-row">
+                <h2><%= country.country_name %> (<%= country.country_code %>)</h2>
+
+                <div class="country-header-actions">
+                  <% if (country.list_type === "visited") { %>
+                    <span class="status-badge visited-badge">Visited</span>
+                  <% } else { %>
+                    <span class="status-badge bucket-badge">Bucket List</span>
+                  <% } %>
+
+                  <a href="/bucketlist/<%= country.country_code %>/travel" class="plan-trip-btn">
+                    Plan Trip
+                  </a>
+
+                  <% if (country.list_type === "visited") { %>
+                    <form action="/bucketlist/remove-country-items" method="POST">
+                      <input type="hidden" name="countryCode" value="<%= country.country_code %>" />
+                      <button type="submit" class="remove-country-btn">Remove</button>
+                    </form>
+                  <% } %>
+                </div>
+              </div>
+
+              <div class="add-form-box">
+                <form action="/bucketlist/add-item" method="POST" class="add-item-form">
+                  <input type="hidden" name="countryCode" value="<%= country.country_code %>" />
+
+                  <select name="section" required>
+                    <option value="">Select section</option>
+                    <option value="places">Places to Visit</option>
+                    <option value="food">What to Eat</option>
+                    <option value="activities">Activities to Do</option>
+                  </select>
+
+                  <input
+                    type="text"
+                    name="itemText"
+                    placeholder="Add a new item..."
+                    required
+                  />
+
+                  <button type="submit">Add</button>
+                </form>
+              </div>
+
+              <div class="sections-grid">
+                <div class="section-box">
+                  <h3>Places to Visit</h3>
+
+                  <% if (country.places.length === 0) { %>
+                    <p class="empty-text">No places added yet.</p>
+                  <% } else { %>
+                    <% country.places.forEach(function(item) { %>
+                      <div class="list-item">
+                        <input
+                          type="text"
+                          name="itemText"
+                          value="<%= item.item_text %>"
+                          class="edit-input"
+                          form="edit-places-<%= item.id %>"
+                          required
+                        />
+
+                        <div class="button-column">
+                          <form action="/bucketlist/remove-item" method="POST">
+                            <input type="hidden" name="itemId" value="<%= item.id %>" />
+                            <button type="submit" class="remove-btn">Remove</button>
+                          </form>
+
+                          <form
+                            id="edit-places-<%= item.id %>"
+                            action="/bucketlist/edit-item"
+                            method="POST"
+                          >
+                            <input type="hidden" name="itemId" value="<%= item.id %>" />
+                            <button type="submit" class="edit-btn">Edit</button>
+                          </form>
+                        </div>
+                      </div>
+                    <% }); %>
+                  <% } %>
+                </div>
+
+                <div class="section-box">
+                  <h3>What to Eat</h3>
+
+                  <% if (country.food.length === 0) { %>
+                    <p class="empty-text">No food items added yet.</p>
+                  <% } else { %>
+                    <% country.food.forEach(function(item) { %>
+                      <div class="list-item">
+                        <input
+                          type="text"
+                          name="itemText"
+                          value="<%= item.item_text %>"
+                          class="edit-input"
+                          form="edit-food-<%= item.id %>"
+                          required
+                        />
+
+                        <div class="button-column">
+                          <form action="/bucketlist/remove-item" method="POST">
+                            <input type="hidden" name="itemId" value="<%= item.id %>" />
+                            <button type="submit" class="remove-btn">Remove</button>
+                          </form>
+
+                          <form
+                            id="edit-food-<%= item.id %>"
+                            action="/bucketlist/edit-item"
+                            method="POST"
+                          >
+                            <input type="hidden" name="itemId" value="<%= item.id %>" />
+                            <button type="submit" class="edit-btn">Edit</button>
+                          </form>
+                        </div>
+                      </div>
+                    <% }); %>
+                  <% } %>
+                </div>
+
+                <div class="section-box">
+                  <h3>Activities to Do</h3>
+
+                  <% if (country.activities.length === 0) { %>
+                    <p class="empty-text">No activities added yet.</p>
+                  <% } else { %>
+                    <% country.activities.forEach(function(item) { %>
+                      <div class="list-item">
+                        <input
+                          type="text"
+                          name="itemText"
+                          value="<%= item.item_text %>"
+                          class="edit-input"
+                          form="edit-activities-<%= item.id %>"
+                          required
+                        />
+
+                        <div class="button-column">
+                          <form action="/bucketlist/remove-item" method="POST">
+                            <input type="hidden" name="itemId" value="<%= item.id %>" />
+                            <button type="submit" class="remove-btn">Remove</button>
+                          </form>
+
+                          <form
+                            id="edit-activities-<%= item.id %>"
+                            action="/bucketlist/edit-item"
+                            method="POST"
+                          >
+                            <input type="hidden" name="itemId" value="<%= item.id %>" />
+                            <button type="submit" class="edit-btn">Edit</button>
+                          </form>
+                        </div>
+                      </div>
+                    <% }); %>
+                  <% } %>
+                </div>
+              </div>
+            </div>
+
+          <% }); %>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>

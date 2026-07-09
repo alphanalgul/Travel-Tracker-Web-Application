@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Profile</title>
+  <link rel="stylesheet" href="/profilestyle.css" />
+</head>
+<body>
+  <main class="profile-page">
+    <section class="profile-header">
+      <div class="profile-image-wrapper">
+        <img
+          src="<%= user.profile_image %>"
+          alt="Profile Image"
+          class="profile-image"
+        />
+      </div>
+
+      <h1 class="profile-name"><%= user.username %></h1>
+      <p class="joined-date">
+        Joined <%= new Date(user.registration_date).toLocaleDateString('en-GB', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        }) %>
+      </p>
+    </section>
+
+    <section class="stats-section">
+      <div class="stats-grid">
+
+        <div class="stat-card">
+          <div class="stat-icon soft-green">🌍</div>
+          <h2>Countries Visited</h2>
+
+          <div class="stat-main-row">
+            <span class="stat-number"><%= stats.countriesVisited %></span>
+            <span class="badge"><%= stats.currentLevel %></span>
+          </div>
+
+          <div class="milestone-row">
+            <strong>
+              <%= stats.nextMilestone ? stats.nextMilestone + " countries" : "Max level" %>
+            </strong>
+
+            <div class="progress-bar">
+              <div
+                class="progress-fill"
+                style="width: <%= Math.min(stats.milestoneProgress, 100) %>%;">
+              </div>
+            </div>
+
+            <p class="stat-description">
+              <% if (stats.nextMilestone) { %>
+                <%= stats.countriesToNext %> more countries to reach your next badge
+              <% } else { %>
+                You reached the highest explorer level
+              <% } %>
+            </p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon soft-peach">📍</div>
+          <h2>Countries Remaining</h2>
+
+          <div class="stat-main-row single">
+            <span class="stat-number"><%= stats.countriesRemaining %></span>
+          </div>
+
+          <p class="stat-description bottom-text">
+            More destinations waiting for you
+          </p>
+        </div>
+
+        <%
+          const visited = stats.countriesVisited;
+          const total = stats.totalCountries;
+          const progressPercent = Math.round((visited / total) * 100);
+        %>
+
+        <div class="stat-card">
+          <div class="stat-icon soft-blue">🧭</div>
+          <h2>World Progress</h2>
+
+          <div
+            class="progress-ring"
+            style="--progress: <%= progressPercent %>;"
+          >
+            <div class="progress-ring-inner">
+              <span><%= progressPercent %>%</span>
+            </div>
+          </div>
+
+          <p class="stat-description centered-text">
+            <%= visited %> of <%= total %> countries explored
+          </p>
+        </div>
+
+      </div>
+    </section>
+  </main>
+</body>
+</html>

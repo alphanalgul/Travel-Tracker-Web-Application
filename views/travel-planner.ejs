@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Travel Planner - <%= countryName %></title>
+  <link rel="stylesheet" href="/travel-planner.css">
+</head>
+<body>
+
+  <main class="travel-planner-container">
+
+    <div class="travel-header">
+      <h1>Plan Your Trip to <%= countryName %></h1>
+
+      <% if (locationName) { %>
+        <p class="muted">
+          Showing results near: <strong><%= locationName %></strong>
+        </p>
+      <% } %>
+    </div>
+
+    <form method="GET" action="/bucketlist/<%= countryCode %>/travel" class="city-search-form">
+      <input
+        type="text"
+        name="city"
+        placeholder="Search city, e.g. Tokyo, Paris, Rome"
+        value="<%= city %>"
+      >
+      <button type="submit">Search City</button>
+    </form>
+
+    <% if (error) { %>
+      <p class="error"><%= error %></p>
+    <% } %>
+
+    <section class="travel-section">
+      <h2>Hotels & Accommodation</h2>
+
+      <% if (hotels.length === 0) { %>
+        <p>No hotels found.</p>
+      <% } else { %>
+        <div class="place-grid">
+          <% hotels.forEach(function(place) { %>
+            <div class="place-card">
+              <h3><%= place.name %></h3>
+              <p><%= place.address %></p>
+
+              <% if (place.distance) { %>
+                <p class="muted"><%= place.distance %></p>
+              <% } %>
+
+              <% if (place.mapsUrl) { %>
+                <a href="<%= place.mapsUrl %>" target="_blank">Open in Maps</a>
+              <% } %>
+            </div>
+          <% }); %>
+        </div>
+      <% } %>
+    </section>
+
+    <section class="travel-section">
+      <h2>Transportation</h2>
+
+      <% if (transport.length === 0) { %>
+        <p>No transportation found.</p>
+      <% } else { %>
+        <div class="place-grid">
+          <% transport.forEach(function(place) { %>
+            <div class="place-card">
+              <h3><%= place.name %></h3>
+              <p><%= place.address %></p>
+
+              <% if (place.distance) { %>
+                <p class="muted"><%= place.distance %></p>
+              <% } %>
+
+              <% if (place.mapsUrl) { %>
+                <a href="<%= place.mapsUrl %>" target="_blank">Open in Maps</a>
+              <% } %>
+            </div>
+          <% }); %>
+        </div>
+      <% } %>
+    </section>
+
+    <section class="travel-section">
+      <h2>Tourist Attractions</h2>
+
+      <% if (attractions.length === 0) { %>
+        <p>No attractions found.</p>
+      <% } else { %>
+        <div class="place-grid">
+          <% attractions.forEach(function(place) { %>
+            <div class="place-card">
+              <h3><%= place.name %></h3>
+              <p><%= place.address %></p>
+
+              <% if (place.distance) { %>
+                <p class="muted"><%= place.distance %></p>
+              <% } %>
+
+              <% if (place.mapsUrl) { %>
+                <a href="<%= place.mapsUrl %>" target="_blank">Open in Maps</a>
+              <% } %>
+            </div>
+          <% }); %>
+        </div>
+      <% } %>
+    </section>
+
+    <a href="/bucketlist" class="back-link">Back to Bucket List</a>
+
+  </main>
+
+</body>
+</html>

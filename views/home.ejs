@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <title>Travel Tracker</title>
+    <link rel="stylesheet" href="/globals.css" />
+    <link rel="stylesheet" href="/homestyle.css" />
+    <link rel="stylesheet" href="/styleguide.css" />
+    <!--Bootstrap CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  </head>
+  <body>
+
+
+    <div class="examples-about">
+        <!--Displaying login successful message-->
+        <% if (msg && msg.length > 0) { %>
+          <p id="flash-message" class="flash-message"><%= msg[0] %></p>
+        <% } %>
+
+      <!--Header-->
+      <header class="header" role="banner">
+        <div class="block">
+          <div class="figma" aria-label="Figma logo">
+            <img class="icon" src="/assets/world-map-svgrepo-com.svg" alt="Figma icon"/>
+          </div>
+        </div>
+      <nav class="navigation-pill-list" aria-label="Main navigation">
+        <a href="/worldmap">Interactive World Map</a>
+         <a href="/bucketlist">Bucket List</a>
+         <a href="/travelstats">Stats</a>
+         <a href="/gallery">Travel Gallery</a>
+         <div class="flex-shrink-0 dropdown"> 
+                            <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> 
+                              <!--Displaying the users profile picture in the little circle on the top right of the page-->  
+                              <img src="<%= user.profile_image %>" alt="Profile" width="32" height="32" class="rounded-circle"> 
+                            </a> <ul class="dropdown-menu text-small shadow" style=""> 
+                                <li><a class="dropdown-item" href="/profile">Profile</a></li> <li><hr class="dropdown-divider"></li>
+                                 <li><a class="dropdown-item" href="/">Sign out</a></li> </ul> </div>
+    </nav>
+      </header>
+      
+      <!-- Hero-->
+      <section class="hero-basic" aria-labelledby="hero-title">
+        <div class="text-content-title">
+          <h1 class="text-wrapper-2" id="hero-title">Travel Tracker</h1>
+          <p class="text-wrapper-3">Explore your travel history and plan future adventures.</p>
+        </div>
+      </section>
+      <!-- Image panels-->
+     <section class="panel-image-double features-section" aria-label="App features">
+         <a href="/worldmap" class="feature-card world-map-card">
+            <div class="feature-card__content">
+                 <h3>Interactive World Map</h3>
+                 <p>Mark visited countries and explore your travel history visually.</p>
+            </div>
+        </a>
+
+        <a href="/bucketlist" class="feature-card bucket-list-card">
+             <div class="feature-card__content">
+                 <h3>Bucket List</h3>
+                 <p>Add destinations to your bucket list before you kick the bucket.</p>
+             </div>
+        </a>
+
+        <a href="/travelstats" class="feature-card stats-card">
+             <div class="feature-card__content">
+              <h3>Travel Stats</h3>
+              <p>See how many countries you have visited so far and what remains.</p>
+             </div>
+         </a>
+
+        <a href="/gallery" class="feature-card gallery-card">
+             <div class="feature-card__content">
+              <h3>Travel Gallery</h3>
+              <p>Store and organize your travel memories in one place.</p>
+             </div>
+         </a>
+    </section>
+      <!-- Footer -->
+     <footer class="footer">
+        <div class="footer-container">
+
+            <div class="footer-brand">
+                <h3>Travel Tracker</h3>
+                <p>Track your journeys around the world.</p>
+            </div>
+
+            <div class="footer-links">
+                  <div class="footer-column">
+                  <h4>Features</h4>
+                  <a href="/worldmap">Interactive Map</a>
+                  <a href="/bucketlist">Bucket List</a>
+                  <a href="/travelstats">Travel Stats</a>
+                  <a href="/gallery">Travel Gallery</a>
+                  </div>
+
+                  <div class="footer-column">
+                    <h4>Resources</h4>
+                    <a href="https://github.com/alphanalgul">GitHub</a>
+                 </div>
+            </div>
+
+        </div>
+
+  <div class="footer-bottom">
+    © 2026 Alphan Algül
+  </div>
+</footer>
+    </div>
+  </body>
+
+  <!--Display flash message for 5 seconds-->
+  <script>
+    const flash = document.getElementById("flash-message");
+    if (flash) {
+      setTimeout(() => {
+      flash.style.opacity = "0";
+       setTimeout(() => flash.remove(), 500);
+      }, 5000);
+    }
+  </script>
+
+</html>

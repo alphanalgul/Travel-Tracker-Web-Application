@@ -1,0 +1,102 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f7fb;
+  color: #222;
+}
+
+.travel-planner-container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.travel-header {
+  margin-bottom: 25px;
+}
+
+.travel-header h1 {
+  margin-bottom: 8px;
+  font-size: 34px;
+}
+
+.city-search-form {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.city-search-form input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.city-search-form button {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #1f6feb;
+  color: white;
+  font-weight: bold;
+}
+
+.travel-section {
+  margin-top: 40px;
+}
+
+.travel-section h2 {
+  margin-bottom: 16px;
+}
+
+.place-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.place-card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 18px;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.place-card h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.place-card p {
+  line-height: 1.4;
+}
+
+.place-card a {
+  display: inline-block;
+  margin-top: 8px;
+  text-decoration: none;
+  color: #1f6feb;
+  font-weight: bold;
+}
+
+.muted {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 35px;
+  text-decoration: none;
+  color: #1f6feb;
+  font-weight: bold;
+}

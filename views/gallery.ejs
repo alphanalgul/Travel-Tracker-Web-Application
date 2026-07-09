@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery</title>
+  <link rel="stylesheet" href="/gallerystyle.css" />
+</head>
+<body>
+  <main class="gallery-page">
+    <div class="gallery-header">
+      <h1>Your Travel Gallery</h1>
+      <p>Create memory sections for countries you have visited.</p>
+    </div>
+
+    <% if (success && success.length > 0) { %>
+      <div class="flash-success"><%= success[0] %></div>
+    <% } %>
+
+    <% if (error && error.length > 0) { %>
+      <div class="flash-error"><%= error[0] %></div>
+    <% } %>
+
+    <div class="gallery-layout">
+      <aside class="gallery-sidebar">
+        <h2>Visited Countries</h2>
+
+        <% if (visitedCountries.length === 0) { %>
+          <p>You have not added any visited countries yet.</p>
+        <% } %>
+
+        <% visitedCountries.forEach(country => { %>
+          <a
+            href="/gallery?country=<%= country.country_code %>"
+            class="country-link <%= selectedCountryCode === country.country_code ? 'active' : '' %>"
+          >
+            <%= country.country_name %>
+          </a>
+        <% }) %>
+      </aside>
+
+      <section class="gallery-content">
+        <% if (selectedCountry) { %>
+          <div class="country-header">
+            <h2><%= selectedCountry.country_name %></h2>
+            <p>Add sections like landmarks, food, museums, beaches, activities, and more.</p>
+          </div>
+
+          <div class="add-section-card">
+            <h3>Create New Section</h3>
+            <form action="/gallery/section" method="POST">
+              <input type="hidden" name="country_code" value="<%= selectedCountry.country_code %>">
+
+              <label>Section Title</label>
+              <input
+                type="text"
+                name="title"
+                placeholder="e.g. Great Pyramids of Giza"
+                required
+              >
+
+              <label>Description</label>
+              <textarea
+                name="description"
+                rows="4"
+                placeholder="Write about this place or experience..."
+              ></textarea>
+
+              <button type="submit">Add Section</button>
+            </form>
+          </div>
+
+          <% if (gallerySections.length === 0) { %>
+            <p class="empty-message">No sections yet for this country.</p>
+          <% } %>
+
+          <% gallerySections.forEach(section => { %>
+            <div class="section-card">
+              <div class="section-top">
+                <div>
+                  <h3><%= section.title %></h3>
+                  <p><%= section.description %></p>
+                </div>
+
+                <form action="/gallery/section/<%= section.id %>/delete" method="POST">
+                  <input type="hidden" name="country_code" value="<%= selectedCountry.country_code %>">
+                  <button type="submit" class="delete-btn">Delete Section</button>
+                </form>
+              </div>
+
+              <div class="upload-card">
+                <form action="/gallery/photo" method="POST" enctype="multipart/form-data">
+                  <input type="hidden" name="section_id" value="<%= section.id %>">
+                  <input type="hidden" name="country_code" value="<%= selectedCountry.country_code %>">
+
+                  <label>Upload Photo</label>
+                  <input type="file" name="photo" accept="image/*" required>
+
+                  <label>Caption</label>
+                  <input
+                    type="text"
+                    name="caption"
+                    placeholder="Optional caption"
+                  >
+
+                  <button type="submit">Upload</button>
+                </form>
+              </div>
+
+              <div class="photo-grid">
+                <% if (!section.photos || section.photos.length === 0) { %>
+                  <p>No photos uploaded for this section yet.</p>
+                <% } %>
+
+                <% section.photos.forEach(photo => { %>
+                  <div class="photo-card">
+                      <img
+                        src="<%= photo.image_path %>"
+                        alt="Gallery photo"
+                        class="gallery-photo"
+                        onclick="openPhotoModal('<%= photo.image_path %>', '<%= photo.caption ? photo.caption.replace(/'/g, "\\'") : "" %>')"
+                      >
+
+                      <% if (photo.caption) { %>
+                        <p><%= photo.caption %></p>
+                      <% } %>
+
+                      <div class="photo-actions">
+                        <a href="/gallery/photo/<%= photo.id %>/download" class="download-btn">
+                          Download
+                        </a>
+
+                        <form action="/gallery/photo/<%= photo.id %>/delete" method="POST">
+                          <input type="hidden" name="country_code" value="<%= selectedCountry.country_code %>">
+                          <button type="submit" class="delete-btn">Delete</button>
+                        </form>
+                      </div>
+                    </div>
+                  <% }) %>
+              </div>
+            </div>
+          <% }) %>
+        <% } else { %>
+          <p class="empty-message">Select a visited country to start building your gallery.</p>
+        <% } %>
+      </section>
+    </div>
+  </main>
+  <div id="photoModal" class="photo-modal" onclick="closePhotoModal()">
+  <span class="photo-modal-close">&times;</span>
+
+  <div class="photo-modal-content" onclick="event.stopPropagation()">
+    <img id="photoModalImg" src="" alt="Full screen photo">
+    <p id="photoModalCaption"></p>
+  </div>
+</div>
+
+<script>
+      function openPhotoModal(imageSrc, caption) {
+        document.getElementById("photoModal").style.display = "flex";
+        document.getElementById("photoModalImg").src = imageSrc;
+        document.getElementById("photoModalCaption").textContent = caption || "";
+        document.body.style.overflow = "hidden";
+      }
+
+      function closePhotoModal() {
+        document.getElementById("photoModal").style.display = "none";
+        document.getElementById("photoModalImg").src = "";
+        document.getElementById("photoModalCaption").textContent = "";
+        document.body.style.overflow = "auto";
+      }
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          closePhotoModal();
+        }
+      });
+</script>
+</body>
+</html>
